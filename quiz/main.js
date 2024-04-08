@@ -160,4 +160,4 @@ function test()
 //         console.log(value);
 //     });
 // } 
-// to jeszcze nie dziala
+// to jeszcze nie dzialaaa
