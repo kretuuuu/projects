@@ -111,6 +111,7 @@ var radiobuttons = document.querySelectorAll('input[type="radio"]'), btn = docum
 btn.innerText = "Sprawdź odpowiedzi";
 btn.disabled = true;
 btn.addEventListener('click', test)
+
 questions.append(btn);
 
 radiobuttons.forEach(element => {
@@ -139,7 +140,7 @@ function test()
     checkeds.forEach(element => {
         if (element.value == qs[i].correct) 
         {   
-            color(element.value);
+            // color(element.value); do odkomentowania
             pkt++
         }
         i++
