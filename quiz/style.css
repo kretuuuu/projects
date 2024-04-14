@@ -1,7 +1,8 @@
-button:disabled {
+*:disabled {
     cursor: not-allowed;
 }
 
-button:not(:disabled) {
+button, input :not(:disabled) {
     cursor: pointer;
 }
+

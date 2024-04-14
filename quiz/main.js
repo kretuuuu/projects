@@ -11,80 +11,81 @@ let qs = [
             },
         correct: '9.81 m/s^2'
     },
-    {
-        q: "Jak nazywa się najwyższa góra świata?",
-        answers: 
-            {
-                a: 'Mount Everest',
-                b: 'K2',
-                c: 'Annapurna',
-                d: 'Kangchenjunga'
-            },
-        correct: 'Mount Everest'
-    },
-    {
-        q: "Ile to jest pierwiastek kwadratowy z 144?",
-        answers: 
-            {
-                a: '12',
-                b: '11',
-                c: '14',
-                d: '10'
-            },
-        correct: '12'
-    },
-    {
-        q: "Kto był pierwszym człowiekiem na Księżycu?",
-        answers: 
-            {
-                a: 'Neil Armstrong',
-                b: 'Buzz Aldrin',
-                c: 'Yuri Gagarin',
-                d: 'Alan Shepard'
-            },
-        correct: 'Neil Armstrong'
-    },
-    {
-        q: "Kto jest autorem utworu 'Romeo i Julia'?",
-        answers: 
-            {
-                a: 'William Shakespeare',
-                b: 'Jane Austen',
-                c: 'Fyodor Dostoevsky',
-                d: 'Charles Dickens'
-            },
-        correct: 'William Shakespeare'
-    },
-    {
-        q: "Jakie jest największe państwo na świecie pod względem powierzchni?",
-        answers: 
-            {
-                a: 'Rosja',
-                b: 'Kanada',
-                c: 'Stany Zjednoczone',
-                d: 'Chiny'
-            },
-        correct: 'Rosja'
-    },
-    {
-        q: "Kto jest autorem obrazu 'Mona Lisa'?",
-        answers: 
-            {
-                a: 'Leonardo da Vinci',
-                b: 'Vincent van Gogh',
-                c: 'Pablo Picasso',
-                d: 'Michelangelo'
-            },
-        correct: 'Leonardo da Vinci'
-    }
+    // {
+    //     q: "Jak nazywa się najwyższa góra świata?",
+    //     answers: 
+    //         {
+    //             a: 'Mount Everest',
+    //             b: 'K2',
+    //             c: 'Annapurna',
+    //             d: 'Kangchenjunga'
+    //         },
+    //     correct: 'Mount Everest'
+    // },
+    // {
+    //     q: "Ile to jest pierwiastek kwadratowy z 144?",
+    //     answers: 
+    //         {
+    //             a: '12',
+    //             b: '11',
+    //             c: '14',
+    //             d: '10'
+    //         },
+    //     correct: '12'
+    // },
+    // {
+    //     q: "Kto był pierwszym człowiekiem na Księżycu?",
+    //     answers: 
+    //         {
+    //             a: 'Neil Armstrong',
+    //             b: 'Buzz Aldrin',
+    //             c: 'Yuri Gagarin',
+    //             d: 'Alan Shepard'
+    //         },
+    //     correct: 'Neil Armstrong'
+    // },
+    // {
+    //     q: "Kto jest autorem utworu 'Romeo i Julia'?",
+    //     answers: 
+    //         {
+    //             a: 'William Shakespeare',
+    //             b: 'Jane Austen',
+    //             c: 'Fyodor Dostoevsky',
+    //             d: 'Charles Dickens'
+    //         },
+    //     correct: 'William Shakespeare'
+    // },
+    // {
+    //     q: "Jakie jest największe państwo na świecie pod względem powierzchni?",
+    //     answers: 
+    //         {
+    //             a: 'Rosja',
+    //             b: 'Kanada',
+    //             c: 'Stany Zjednoczone',
+    //             d: 'Chiny'
+    //         },
+    //     correct: 'Rosja'
+    // },
+    // {
+    //     q: "Kto jest autorem obrazu 'Mona Lisa'?",
+    //     answers: 
+    //         {
+    //             a: 'Leonardo da Vinci',
+    //             b: 'Vincent van Gogh',
+    //             c: 'Pablo Picasso',
+    //             d: 'Michelangelo'
+    //         },
+    //     correct: 'Leonardo da Vinci'
+    // }
 ];
 
 
-var x = 0, questions = document.createElement('div');
+var x = 0, questions = document.createElement('div'), corrects = [];
 
 document.body.append(questions);
 
 qs.forEach(element => {
+    corrects.push(element.correct);
     let div = document.createElement('div');
     div.id = "question"+x;
     let h = document.createElement('h2');
@@ -94,11 +95,8 @@ qs.forEach(element => {
     {
         var li = document.createElement('li'), radio = document.createElement('input'), p = document.createElement('span');
         p.innerText = key.toString().toUpperCase()+" : "+element.answers[key];
-        radio.type = 'radio';
-        radio.name = "answ"+x;
-        radio.value = element.answers[key];
-        li.append(radio);
-        li.append(p);
+        radio.type = 'radio', radio.name = "answ"+x, radio.value = element.answers[key];
+        li.style.listStyle = "none", li.append(radio), li.append(p);
         ul.append(li);
     }
     div.append(h, ul);
@@ -108,9 +106,7 @@ qs.forEach(element => {
 
 var radiobuttons = document.querySelectorAll('input[type="radio"]'), btn = document.createElement('button'), checkeds = []
 
-btn.innerText = "Sprawdź odpowiedzi";
-btn.disabled = true;
-btn.addEventListener('click', test)
+btn.innerText = "Sprawdź odpowiedzi", btn.disabled = true;
 
 questions.append(btn);
 
@@ -126,6 +122,7 @@ radiobuttons.forEach(element => {
         {
             btn.disabled = false;
             btn.innerText = "Sprawdź odpowiedzi";
+            btn.addEventListener('click', test);
         }
         else
         {
@@ -138,27 +135,24 @@ function test()
 {
     let i = 0, pkt = 0, score = document.createElement('div');
     checkeds.forEach(element => {
-        if (element.value == qs[i].correct) 
-        {   
-            // color(element.value); do odkomentowania
-            pkt++
-        }
+        element.value != qs[i].correct ? element.nextSibling.style.cssText = "background-color: darkred; color: white;" : pkt++;
         i++
     });
+    showCorrect();
+    radiobuttons.forEach(element => {
+        element.disabled = true;
+    });
+    
+    questions.removeChild(btn);
     score.innerText = "Poprawne odpowiedzi: "+pkt;
     document.body.append(score);
 }
 
-// function color(valueElement)
-// {
-//     var spans = document.querySelectorAll('span');
-//     spans.forEach(element => {
-//         if (element.innerText.slice(3) == valueElement)
-//         {
-//             console.log(element.innerHTML.slice(3), valueElement)
-//             element.style.color = "green";
-//         }
-//         console.log(value);
-//     });
-// } 
-// to jeszcze nie dzialaaa
+function showCorrect()
+{
+    radiobuttons.forEach(radiob => {
+        corrects.forEach(answer => {
+            if (radiob.value==answer) radiob.nextSibling.style.cssText = "background-color: green; color: white;";
+        });
+    });
+}
