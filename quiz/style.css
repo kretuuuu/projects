@@ -1,3 +1,7 @@
+body {
+    margin: 0;
+}
+
 *:disabled {
     cursor: not-allowed;
 }
@@ -6,3 +10,35 @@ button, input :not(:disabled) {
     cursor: pointer;
 }
 
+.questions {
+    background-color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.answersDivs {
+    width: 500px;
+}
+
+input[type='radio'] {
+    box-sizing: border-box;
+    appearance: none;
+    background: white;
+    outline: 1px solid #333;
+    border: 3px solid white;
+    width: 16px;
+    height: 16px;
+  }
+
+input[type='radio']:checked {
+    background: #333;
+}
+
+.answersDivs span {
+    font-size: 20px;
+}
+
+.score {
+    font-size: 40px;
+}

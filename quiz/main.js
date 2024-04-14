@@ -11,83 +11,84 @@ let qs = [
             },
         correct: '9.81 m/s^2'
     },
-    // {
-    //     q: "Jak nazywa się najwyższa góra świata?",
-    //     answers: 
-    //         {
-    //             a: 'Mount Everest',
-    //             b: 'K2',
-    //             c: 'Annapurna',
-    //             d: 'Kangchenjunga'
-    //         },
-    //     correct: 'Mount Everest'
-    // },
-    // {
-    //     q: "Ile to jest pierwiastek kwadratowy z 144?",
-    //     answers: 
-    //         {
-    //             a: '12',
-    //             b: '11',
-    //             c: '14',
-    //             d: '10'
-    //         },
-    //     correct: '12'
-    // },
-    // {
-    //     q: "Kto był pierwszym człowiekiem na Księżycu?",
-    //     answers: 
-    //         {
-    //             a: 'Neil Armstrong',
-    //             b: 'Buzz Aldrin',
-    //             c: 'Yuri Gagarin',
-    //             d: 'Alan Shepard'
-    //         },
-    //     correct: 'Neil Armstrong'
-    // },
-    // {
-    //     q: "Kto jest autorem utworu 'Romeo i Julia'?",
-    //     answers: 
-    //         {
-    //             a: 'William Shakespeare',
-    //             b: 'Jane Austen',
-    //             c: 'Fyodor Dostoevsky',
-    //             d: 'Charles Dickens'
-    //         },
-    //     correct: 'William Shakespeare'
-    // },
-    // {
-    //     q: "Jakie jest największe państwo na świecie pod względem powierzchni?",
-    //     answers: 
-    //         {
-    //             a: 'Rosja',
-    //             b: 'Kanada',
-    //             c: 'Stany Zjednoczone',
-    //             d: 'Chiny'
-    //         },
-    //     correct: 'Rosja'
-    // },
-    // {
-    //     q: "Kto jest autorem obrazu 'Mona Lisa'?",
-    //     answers: 
-    //         {
-    //             a: 'Leonardo da Vinci',
-    //             b: 'Vincent van Gogh',
-    //             c: 'Pablo Picasso',
-    //             d: 'Michelangelo'
-    //         },
-    //     correct: 'Leonardo da Vinci'
-    // }
+    {
+        q: "Jak nazywa się najwyższa góra świata?",
+        answers: 
+            {
+                a: 'Mount Everest',
+                b: 'K2',
+                c: 'Annapurna',
+                d: 'Kangchenjunga'
+            },
+        correct: 'Mount Everest'
+    },
+    {
+        q: "Ile to jest pierwiastek kwadratowy z 144?",
+        answers: 
+            {
+                a: '12',
+                b: '11',
+                c: '14',
+                d: '10'
+            },
+        correct: '12'
+    },
+    {
+        q: "Kto był pierwszym człowiekiem na Księżycu?",
+        answers: 
+            {
+                a: 'Neil Armstrong',
+                b: 'Buzz Aldrin',
+                c: 'Yuri Gagarin',
+                d: 'Alan Shepard'
+            },
+        correct: 'Neil Armstrong'
+    },
+    {
+        q: "Kto jest autorem utworu 'Romeo i Julia'?",
+        answers: 
+            {
+                a: 'William Shakespeare',
+                b: 'Jane Austen',
+                c: 'Fyodor Dostoevsky',
+                d: 'Charles Dickens'
+            },
+        correct: 'William Shakespeare'
+    },
+    {
+        q: "Jakie jest największe państwo na świecie pod względem powierzchni?",
+        answers: 
+            {
+                a: 'Rosja',
+                b: 'Kanada',
+                c: 'Stany Zjednoczone',
+                d: 'Chiny'
+            },
+        correct: 'Rosja'
+    },
+    {
+        q: "Kto jest autorem obrazu 'Mona Lisa'?",
+        answers: 
+            {
+                a: 'Leonardo da Vinci',
+                b: 'Vincent van Gogh',
+                c: 'Pablo Picasso',
+                d: 'Michelangelo'
+            },
+        correct: 'Leonardo da Vinci'
+    }
 ];
 
 
 var x = 0, questions = document.createElement('div'), corrects = [];
 
+questions.classList.add('questions');
 document.body.append(questions);
 
 qs.forEach(element => {
     corrects.push(element.correct);
     let div = document.createElement('div');
-    div.id = "question"+x;
+    div.id = "question"+x; div.classList.add('answersDivs')
     let h = document.createElement('h2');
     h.innerText = x+1+". "+element.q;
     let ul = document.createElement('ul');
@@ -138,21 +139,15 @@ function test()
         element.value != qs[i].correct ? element.nextSibling.style.cssText = "background-color: darkred; color: white;" : pkt++;
         i++
     });
-    showCorrect();
-    radiobuttons.forEach(element => {
-        element.disabled = true;
-    });
-    
-    questions.removeChild(btn);
-    score.innerText = "Poprawne odpowiedzi: "+pkt;
-    document.body.append(score);
-}
-
-function showCorrect()
-{
     radiobuttons.forEach(radiob => {
+        radiob.disabled = true;
         corrects.forEach(answer => {
             if (radiob.value==answer) radiob.nextSibling.style.cssText = "background-color: green; color: white;";
         });
     });
+    
+    score.classList.add('score')
+    questions.removeChild(btn);
+    score.innerText = "Poprawne odpowiedzi: "+pkt;
+    questions.append(score);
 }
